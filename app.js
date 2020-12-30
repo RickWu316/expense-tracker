@@ -21,7 +21,7 @@ app.use(bodyParser.urlencoded({ extended: true }))
 
 
 
-mongoose.connect('mongodb://localhost/Records') // 設定連線到 mongoDB
+mongoose.connect('mongodb://localhost/Records', { useNewUrlParser: true, useUnifiedTopology: true }) // 設定連線到 mongoDB
 // 取得資料庫連線狀態
 const db = mongoose.connection
 // 連線異常
