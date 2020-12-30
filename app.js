@@ -2,6 +2,8 @@ const express = require('express')
 const app = express()
 const exphbs = require('express-handlebars');
 const bodyParser = require('body-parser') // 引用 body-parser
+const mongoose = require('mongoose') // 載入 mongoose
+
 // const methodOverride = require('method-override')// 載入 method-override
 // const routes = require('./routes')// 引用路由器
 const PORT = 3000
@@ -19,12 +21,23 @@ app.use(bodyParser.urlencoded({ extended: true }))
 
 
 
+mongoose.connect('mongodb://localhost/Records') // 設定連線到 mongoDB
+// 取得資料庫連線狀態
+const db = mongoose.connection
+// 連線異常
+db.on('error', () => {
+    console.log('mongodb error!')
+})
+// 連線成功
+db.once('open', () => {
+    console.log('mongodb connected!')
+})
+
 
 // // 將 request 導入路由器
 // app.use(routes)
 
 app.get('/', (req, res) => {
-
     res.render('index')
 
 })
