@@ -42,6 +42,11 @@ app.get('/', (req, res) => {
 
 })
 
+app.get('/new', (req, res) => {
+    res.render('new')
+
+})
+
 
 // 設定應用程式監聽的埠號
 app.listen(PORT, () => {
