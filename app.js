@@ -3,6 +3,7 @@ const app = express()
 const exphbs = require('express-handlebars');
 const bodyParser = require('body-parser') // 引用 body-parser
 const mongoose = require('mongoose') // 載入 mongoose
+const records = require('./models/records')
 
 // const methodOverride = require('method-override')// 載入 method-override
 // const routes = require('./routes')// 引用路由器
@@ -34,18 +35,41 @@ db.once('open', () => {
 })
 
 
+const categoryImage = {
+
+    home: '<i class= "fas fa-home" ></i>',
+    shuttle: '< i class="fas fa-shuttle-van" ></i >',
+    fun: '< i class="fas fa-grin-beam" ></i >',
+    food: '< i class="fas fa-utensils" ></i >',
+    other: ' < i class= "fas fa-pen" ></i > '
+
+}
+
+
+
 // // 將 request 導入路由器
 // app.use(routes)
 
-app.get('/', (req, res) => {
-    res.render('index')
 
+app.get('/', (req, res) => {
+    // console.log(categoryImage.home)
+    records.find() // 取出 Todo model 裡的所有資料
+        .lean() // 把 Mongoose 的 Model 物件轉換成乾淨的 JavaScript 資料陣列
+        // .sort({ _id: 'asc' }) // 新增這裡：根據 _id 升冪排序
+        .then(record => res.render('index', { record })) // 將資料傳給 index 樣板
+        .catch(error => console.error(error)) // 錯誤處理
 })
 
 app.get('/new', (req, res) => {
     res.render('new')
 
 })
+
+app.get('/edit', (req, res) => {
+    res.render('edit')
+
+})
+
 
 
 // 設定應用程式監聽的埠號
