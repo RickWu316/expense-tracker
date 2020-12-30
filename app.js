@@ -34,9 +34,9 @@ db.once('open', () => {
     console.log('mongodb connected!')
 })
 
+const category = ['home', 'shuttle', 'fun', 'food', 'other']
 
 const categoryImage = {
-
     home: '<i class= "fas fa-home" ></i>',
     shuttle: '< i class="fas fa-shuttle-van" ></i >',
     fun: '< i class="fas fa-grin-beam" ></i >',
@@ -45,7 +45,9 @@ const categoryImage = {
 
 }
 
+// let test = categoryImage[category[Math.floor(Math.random() * 4)]]
 
+// console.log(test)
 
 // // 將 request 導入路由器
 // app.use(routes)
@@ -65,9 +67,27 @@ app.get('/new', (req, res) => {
 
 })
 
-app.get('/edit', (req, res) => {
-    res.render('edit')
+app.get('/edit/:id', (req, res) => {
+    const id = req.params.id
+    console.log(id)
+    return records.findById(id)
+        .lean()
+        .then(record => res.render('edit', { record }))
+        .catch(error => console.log(error))
 
+    // res.render('edit')
+})
+
+
+app.post('/edit/:id', (req, res) => {
+    const body = req.body
+    // console.log(body)
+    // return records.findById(id)
+    //     .lean()
+    //     .then(record => res.render('edit', { record }))
+    //     .catch(error => console.log(error))
+
+    // // res.render('edit')
 })
 
 
