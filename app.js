@@ -68,10 +68,6 @@ app.get('/', (req, res) => {
         .catch(error => console.error(error)) // 錯誤處理
 })
 
-app.get('/new', (req, res) => {
-    res.render('new')
-
-})
 
 app.get('/edit/:id', (req, res) => {
     const id = req.params.id
@@ -87,13 +83,25 @@ app.get('/edit/:id', (req, res) => {
 
 app.post('/edit/:id', (req, res) => {
     const body = req.body
-    console.log(body)
-    // return records.findById(id)
-    //     .lean()
-    //     .then(record => res.render('edit', { record }))
-    //     .catch(error => console.log(error))
+    const id = req.params.id
+    // console.log(body)
 
-    // // res.render('edit')
+    return records.findById(id)
+        .then(record => {
+            for (const element in body) {
+                record[element] = body[element]
+            }
+            return record.save()
+        }
+        )
+        .then(() => res.redirect(`/edit/${id}`))
+        .catch(error => console.log(error))
+
+})
+
+app.get('/new', (req, res) => {
+    res.render('new')
+
 })
 
 app.post('/new', (req, res) => {
@@ -108,12 +116,7 @@ app.post('/new', (req, res) => {
             .then(() => res.redirect('/'))
 
     }
-    // return records.findById(id)
-    //     .lean()
-    //     .then(record => res.render('edit', { record }))
-    //     .catch(error => console.log(error))
 
-    // // res.render('edit')
 })
 
 
