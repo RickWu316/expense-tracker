@@ -7,8 +7,19 @@
     </div>
     <div class="mb-3 row">
         <div class="col-1">類別</div>
-        <div class="col-auto">
-            <input type="text" placeholder="請填入類別" name="category" class="form-control">
+        <div class="col-auto d-flex">
+            {{!-- <input type="text" placeholder="請填入類別" name="category" class="form-control"> --}}
+            {{!-- <input disabled> --}}
+            <select name="category">
+                <option value="" selected>請選擇類別</option>
+                <option value="home">家居物業</option>
+                <option value="shuttle">交通出行</option>
+                <option value="fun">休閒娛樂</option>
+                <option value="food">餐飲食品</option>
+                <option value="other">其他</option>
+
+            </select>
+
         </div>
     </div>
     <div class="mb-3 row">
@@ -28,3 +39,41 @@
         <button type="submit" class="btn btn-success">Create</button>
     </div>
 </form>
+
+{{!--
+const categoryCN = ['家居物業', '交通出行', '休閒娛樂', '餐飲食品 ', '其他']
+const category = ['home', 'shuttle', 'fun', 'food', 'other']
+const categoryImage = {
+
+home: '<i class="fas fa-home fa-3x"></i>',
+shuttle: '<i class="fas fa-shuttle-van fa-3x"></i>',
+fun: '<i class="fas fa-grin-beam fa-3x"></i>',
+food: '<i class="fas fa-utensils fa-3x"></i>',
+other: '<i class="fas fa-pen fa-3x"></i> '
+
+} --}}
+
+{{!-- <select name="category">
+    <option value="" selected>請選擇你最愛的寵物</option>
+    <option value="home">家居物業</option>
+    <option value="shuttle">交通出行</option>
+    <option value="fun">休閒娛樂</option>
+    <option value="food">餐飲食品</option>
+    <option value="other">其他</option>
+
+</select> --}}
+
+
+{{!-- <div class="dropdown">
+    <button class="btn dropdown-toggle" type=" button" id="dropdownMenuButton" data-toggle="dropdown"
+        aria-expanded="false">
+        類別
+    </button>
+    <form action="./" method="POST">
+        <ul class="dropdown-menu " aria-labelledby="dropdownMenuButton">
+            <li><a class="dropdown-item " href="#" value="家居物業">家居物業</a></li>
+            <li><a class="dropdown-item" href="#">Another action</a></li>
+            <li><a class="dropdown-item" href="#">Something else here</a></li>
+        </ul>
+    </form>
+</div> --}}
