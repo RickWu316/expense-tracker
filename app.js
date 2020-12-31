@@ -96,6 +96,25 @@ app.post('/edit/:id', (req, res) => {
     // // res.render('edit')
 })
 
+app.post('/new', (req, res) => {
+    const error = "名稱為必填欄位"
+    const body = req.body
+    console.log(body)
+
+    if (body.name === "") {
+        res.render('new', { error })
+    } else {
+        return records.create(body)
+            .then(() => res.redirect('/'))
+
+    }
+    // return records.findById(id)
+    //     .lean()
+    //     .then(record => res.render('edit', { record }))
+    //     .catch(error => console.log(error))
+
+    // // res.render('edit')
+})
 
 
 // 設定應用程式監聽的埠號
