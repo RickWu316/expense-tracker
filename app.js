@@ -1,18 +1,16 @@
 const express = require('express')
-const app = express()
 const exphbs = require('express-handlebars');
 const bodyParser = require('body-parser') // 引用 body-parser
 const mongoose = require('mongoose') // 載入 mongoose
-const records = require('./models/records')
 const Handlebars = require('handlebars')
+const methodOverride = require('method-override')
+const records = require('./models/records')
 const category = require('./category');
+const app = express()
 const { get } = require('http');
 
-// const methodOverride = require('method-override')// 載入 method-override
 // const routes = require('./routes')// 引用路由器
 const PORT = 3000
-
-
 
 
 app.engine('handlebars', exphbs({ defaultLayout: 'main' }))
@@ -21,7 +19,7 @@ app.set('view engine', 'handlebars')
 app.use(bodyParser.urlencoded({ extended: true }))
 
 // // 設定每一筆請求都會透過 methodOverride 進行前置處理
-// app.use(methodOverride('_method'))
+app.use(methodOverride('_method'))
 
 
 //載入轉換icon的helper
@@ -52,8 +50,6 @@ db.once('open', () => {
     console.log('mongodb connected!')
 })
 
-
-// console.log(test)
 
 // // 將 request 導入路由器
 // app.use(routes)
@@ -94,7 +90,7 @@ app.get('/edit/:id', (req, res) => {
 })
 
 
-app.post('/edit/:id', (req, res) => {
+app.put('/edit/:id', (req, res) => {
     const body = req.body
     const id = req.params.id
 
@@ -111,7 +107,7 @@ app.post('/edit/:id', (req, res) => {
 })
 
 
-app.post('/delete/:id', (req, res) => {
+app.delete('/delete/:id', (req, res) => {
     const body = req.body
     const id = req.params.id
 
@@ -121,7 +117,6 @@ app.post('/delete/:id', (req, res) => {
         .catch(error => console.log(error))
 
 })
-
 
 
 

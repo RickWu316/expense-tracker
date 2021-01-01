@@ -50,7 +50,7 @@
         <div class="d-flex col-auto align-items-center" name="function">
             {{!-- <h3 class="mr-1">刪除</h3> --}}
 
-            <form action="./delete/{{ this._id }}" method="POST">
+            <form action="./delete/{{ this._id }}?_method=DELETE" method="POST">
                 <button class="btn btn-danger mr-1" type="submit">刪除</button>
             </form>
 
