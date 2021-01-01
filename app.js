@@ -4,14 +4,13 @@ const bodyParser = require('body-parser') // 引用 body-parser
 const mongoose = require('mongoose') // 載入 mongoose
 const Handlebars = require('handlebars')
 const methodOverride = require('method-override')
-const records = require('./models/records')
 const category = require('./category');
 const app = express()
 const { get } = require('http');
 
-// const routes = require('./routes')// 引用路由器
 const PORT = 3000
 
+const routes = require('./routes')// 引用路由器
 
 app.engine('handlebars', exphbs({ defaultLayout: 'main' }))
 app.set('view engine', 'handlebars')
@@ -52,89 +51,10 @@ db.once('open', () => {
 
 
 // // 將 request 導入路由器
-// app.use(routes)
-
-
-app.get('/', (req, res) => {
-    const filterType = req.query.filter
-    let filterRecords = {}
-    // console.log(filterType)
-
-    if (filterType) {  //讓空集合有東西
-        filterRecords = records.find({ 'category': filterType })
-    } else {
-        filterRecords = records.find()
-    }
-
-    filterRecords.find() // 取出 Todo model 裡的所有資料
-        .lean() // 把 Mongoose 的 Model 物件轉換成乾淨的 JavaScript 資料陣列
-        .then(record => {
-            let totalAmount = 0
-            for (const element in record) {
-                totalAmount += record[element].amount
-            }
-            res.render('index', { record, filterType, totalAmount })
-
-        }) // 將資料傳給 index 樣板
-        .catch(error => console.error(error)) // 錯誤處理
-})
-
-
-app.get('/edit/:id', (req, res) => {
-    const id = req.params.id
-    return records.findById(id)
-        .lean()
-        .then(record => res.render('edit', { record }))
-        .catch(error => console.log(error))
-
-})
-
-
-app.put('/edit/:id', (req, res) => {
-    const body = req.body
-    const id = req.params.id
-
-    return records.findById(id)
-        .then(record => {
-            for (const element in body) {
-                record[element] = body[element]
-            }
-            return record.save()
-        })
-        .then(() => res.redirect(`/`))
-        .catch(error => console.log(error))
-
-})
-
-
-app.delete('/delete/:id', (req, res) => {
-    const body = req.body
-    const id = req.params.id
-
-    return records.findById(id)
-        .then(record => record.remove())
-        .then(() => res.redirect(`/`))
-        .catch(error => console.log(error))
-
-})
+app.use(routes)
 
 
 
-app.get('/new', (req, res) => {
-    res.render('new')
-
-})
-
-app.post('/new', (req, res) => {
-    const error = "名稱為必填欄位"
-    const body = req.body
-    if (body.name === "") {
-        res.render('new', { error })
-    } else {
-        return records.create(body)
-            .then(() => res.redirect('/'))
-    }
-})
 
 
 // 設定應用程式監聽的埠號
