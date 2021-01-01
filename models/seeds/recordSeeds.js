@@ -1,4 +1,3 @@
-
 const db = require('../../config/mongoose')
 const records = require('../records') // 載入 todo model
 // const categoryTransfer = require('../../category')
