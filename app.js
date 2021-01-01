@@ -72,14 +72,20 @@ app.get('/', (req, res) => {
 
     filterRecords.find() // 取出 Todo model 裡的所有資料
         .lean() // 把 Mongoose 的 Model 物件轉換成乾淨的 JavaScript 資料陣列
-        .then(record => res.render('index', { record, filterType })) // 將資料傳給 index 樣板
+        .then(record => {
+            let totalAmount = 0
+            for (const element in record) {
+                totalAmount += record[element].amount
+            }
+            res.render('index', { record, filterType, totalAmount })
+
+        }) // 將資料傳給 index 樣板
         .catch(error => console.error(error)) // 錯誤處理
 })
 
 
 app.get('/edit/:id', (req, res) => {
     const id = req.params.id
-    // console.log(id)
     return records.findById(id)
         .lean()
         .then(record => res.render('edit', { record }))
@@ -91,7 +97,6 @@ app.get('/edit/:id', (req, res) => {
 app.post('/edit/:id', (req, res) => {
     const body = req.body
     const id = req.params.id
-    // console.log(body)
 
     return records.findById(id)
         .then(record => {
@@ -105,6 +110,21 @@ app.post('/edit/:id', (req, res) => {
 
 })
 
+
+app.post('/delete/:id', (req, res) => {
+    const body = req.body
+    const id = req.params.id
+
+    return records.findById(id)
+        .then(record => record.remove())
+        .then(() => res.redirect(`/`))
+        .catch(error => console.log(error))
+
+})
+
+
+
+
 app.get('/new', (req, res) => {
     res.render('new')
 
@@ -113,7 +133,6 @@ app.get('/new', (req, res) => {
 app.post('/new', (req, res) => {
     const error = "名稱為必填欄位"
     const body = req.body
-    console.log(body)
     if (body.name === "") {
         res.render('new', { error })
     } else {
