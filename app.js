@@ -5,7 +5,8 @@ const bodyParser = require('body-parser') // 引用 body-parser
 const mongoose = require('mongoose') // 載入 mongoose
 const records = require('./models/records')
 const Handlebars = require('handlebars')
-const category = require('./category')
+const category = require('./category');
+const { get } = require('http');
 
 // const methodOverride = require('method-override')// 載入 method-override
 // const routes = require('./routes')// 引用路由器
@@ -59,12 +60,19 @@ db.once('open', () => {
 
 
 app.get('/', (req, res) => {
-    // console.log(categoryImage.home)
-    // console.log(categoryTransfer('home'))
-    records.find() // 取出 Todo model 裡的所有資料
+    const filterType = req.query.filter
+    let filterRecords = {}
+    // console.log(filterType)
+
+    if (filterType) {  //讓空集合有東西
+        filterRecords = records.find({ 'category': filterType })
+    } else {
+        filterRecords = records.find()
+    }
+
+    filterRecords.find() // 取出 Todo model 裡的所有資料
         .lean() // 把 Mongoose 的 Model 物件轉換成乾淨的 JavaScript 資料陣列
-        // .sort({ _id: 'asc' }) // 新增這裡：根據 _id 升冪排序
-        .then(record => res.render('index', { record })) // 將資料傳給 index 樣板
+        .then(record => res.render('index', { record, filterType })) // 將資料傳給 index 樣板
         .catch(error => console.error(error)) // 錯誤處理
 })
 
@@ -77,7 +85,6 @@ app.get('/edit/:id', (req, res) => {
         .then(record => res.render('edit', { record }))
         .catch(error => console.log(error))
 
-    // res.render('edit')
 })
 
 
@@ -92,9 +99,8 @@ app.post('/edit/:id', (req, res) => {
                 record[element] = body[element]
             }
             return record.save()
-        }
-        )
-        .then(() => res.redirect(`/edit/${id}`))
+        })
+        .then(() => res.redirect(`/`))
         .catch(error => console.log(error))
 
 })
@@ -108,15 +114,12 @@ app.post('/new', (req, res) => {
     const error = "名稱為必填欄位"
     const body = req.body
     console.log(body)
-
     if (body.name === "") {
         res.render('new', { error })
     } else {
         return records.create(body)
             .then(() => res.redirect('/'))
-
     }
-
 })
 
 

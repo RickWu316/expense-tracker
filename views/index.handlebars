@@ -3,14 +3,20 @@
 <div class="dropdown">
     <button class="btn btn-secondary dropdown-toggle btn-lg" type=" button" id="dropdownMenuButton"
         data-toggle="dropdown" aria-expanded="false">
-        類別
+        {{#if filterType}} {{filterType}} {{else}}類別{{/if}}
     </button>
-    <form action="./" method="POST">
+    <form action="./" method="GET">
         <ul class="dropdown-menu " aria-labelledby="dropdownMenuButton">
-            <li><a class="dropdown-item " href="#">Action</a></li>
-            <li><a class="dropdown-item" href="#">Another action</a></li>
-            <li><a class="dropdown-item" href="#">Something else here</a></li>
+            <li><a class="dropdown-item " href="/?filter=home">家居物業</a></li>
+            <li><a class="dropdown-item" href="/?filter=shuttle">交通出行</a></li>
+            <li><a class="dropdown-item" href="/?filter=fun">休閒娛樂</a></li>
+            <li><a class="dropdown-item" href="/?filter=food">餐飲食品</a></li>
+            <li><a class="dropdown-item" href="/?filter=other">其他</a></li>
         </ul>
+        {{!--
+        const categoryCN = ['家居物業', '交通出行', '休閒娛樂', '餐飲食品 ', '其他']
+
+        const categorys = ['home', 'shuttle', 'fun', 'food', 'other'] --}}
     </form>
 </div>
 
