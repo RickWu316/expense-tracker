@@ -17,9 +17,6 @@ router.get('/', async (req, res) => {
         categoryTransCN[category.category_name] = category.category_name_CN
     }
 
-    // console.log(categoryTransIcons)
-    // console.log(categoryTransCN)
-
 
     if (filterType) {  //讓空集合有東西
         filterRecords = records.find({ 'category': filterType })

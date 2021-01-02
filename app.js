@@ -9,6 +9,7 @@ const PORT = 3000
 
 const routes = require('./routes')// 引用路由器
 
+app.use(express.static('public'))
 app.engine('handlebars', exphbs({ defaultLayout: 'main' }))
 app.set('view engine', 'handlebars')
 // 用 app.use 規定每一筆請求都需要透過 body-parser 進行前置處理

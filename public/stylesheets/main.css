@@ -1,0 +1,8 @@
+.list-group-item:nth-child(odd) {
+  background-color: rgba(153, 204, 225, 0.7);
+}
+
+.list-group-item:nth-child(even) {
+  background-color: rgba(153, 204, 225, 0.4);
+}
+

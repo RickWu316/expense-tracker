@@ -1,8 +1,8 @@
 <h1>老爸私房錢</h1>
 
 <div class="dropdown">
-    <button class="btn btn-secondary dropdown-toggle btn-lg" type=" button" id="dropdownMenuButton"
-        data-toggle="dropdown" aria-expanded="false">
+    <button class="btn btn-info dropdown-toggle btn-lg" type=" button" id="dropdownMenuButton" data-toggle="dropdown"
+        aria-expanded="false">
         {{#if filterCN}} {{ filterCN}} {{else}}類別{{/if}}
     </button>
     <form action="./" method="GET">
@@ -32,48 +32,52 @@
 <div class="" name="list">
 
     {{#each record}}
-    <div class="row border">
-        <div class="col-1 text-center align-self-center">
-            {{!-- <a>{{{this.category}}}</a> --}}
-            <a><i class="{{this.category}} fa-3x"></i></a>
+    <li class="list-group-item">
+        <div class="row">
+            <div class="col-1 text-center align-self-center">
+                {{!-- <a>{{{this.category}}}</a> --}}
+                <a><i class="{{this.category}} fa-3x"></i></a>
 
-            {{!-- <a>{{{transferCN this.category}}}</a> --}}
+                {{!-- <a>{{{transferCN this.category}}}</a> --}}
+            </div>
+            <div class=" d-flex flex-column col-5">
+                <h2>{{this.name}}</h2>
+                <h6>{{this.date}}</h6>
+            </div>
+            <div class="d-flex col-1 align-items-center">
+                <h2>{{this.amount}}</h2>
+
+            </div>
+
+            <div class="d-flex col-auto align-items-center" name="function">
+
+                <button type="submit" class="btn btn-danger mr-1" data-toggle="modal"
+                    data-target="#delete-modal-{{this._id}}">刪除</button>
+                <a class="mr-1 btn btn-secondary" href="./edit/{{ this._id }}">修改</a>
+
+            </div>
         </div>
-        <div class=" d-flex flex-column col-5">
-            <h2>{{this.name}}</h2>
-            <h6>{{this.date}}</h6>
-        </div>
-        <div class="d-flex col-1 align-items-center">
-            <h2>{{this.amount}}</h2>
 
-        </div>
 
-        <div class="d-flex col-auto align-items-center" name="function">
-
-            <button type="submit" class="btn btn-danger mr-1" data-toggle="modal"
-                data-target="#delete-modal-{{this._id}}">刪除</button>
-            <a class="mr-1 btn btn-secondary" href="./edit/{{ this._id }}">修改</a>
-
-        </div>
-    </div>
-
-    <div class="modal fade" id="delete-modal-{{this._id}}" data-backdrop="static" tabindex="-1" data-keyboard="false"
-        aria-labelledby="delete-modal-{{_id}}-Label" aria-hidden="true">
-        <div class="modal-dialog">
-            <div class="modal-content">
-                <div class="modal-body">
-                    確定要刪除支出項目 <strong>{{this.name}}</strong> 嗎？
-                </div>
-                <div class="modal-footer">
-                    <form action="./delete/{{this._id}}?_method=DELETE" method="POST">
-                        <button type="submit" class="btn">確認刪除</button>
-                    </form>
-                    <button type="button" class="btn" data-dismiss="modal">取消</button>
+        <div class="modal fade" id="delete-modal-{{this._id}}" data-backdrop="static" tabindex="-1"
+            data-keyboard="false" aria-labelledby="delete-modal-{{_id}}-Label" aria-hidden="true">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-body">
+                        確定要刪除支出項目 <strong>{{this.name}}</strong> 嗎？
+                    </div>
+                    <div class="modal-footer">
+                        <form action="./delete/{{this._id}}?_method=DELETE" method="POST">
+                            <button type="submit" class="btn">確認刪除</button>
+                        </form>
+                        <button type="button" class="btn" data-dismiss="modal">取消</button>
+                    </div>
                 </div>
             </div>
         </div>
-    </div>
+    </li>
     {{/each}}
+
 </div>
 
 
