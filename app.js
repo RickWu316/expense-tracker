@@ -5,8 +5,7 @@ const Handlebars = require('handlebars')
 const methodOverride = require('method-override')
 const app = express()
 const { get } = require('http');
-const PORT = 3000
-
+const PORT = process.env.PORT || 3000
 const routes = require('./routes')// 引用路由器
 
 app.use(express.static('public'))
