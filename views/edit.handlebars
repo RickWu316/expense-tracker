@@ -8,8 +8,6 @@
     <div class="mb-3 row">
         <div class="col-1">類別</div>
         <div class="col-auto">
-            {{!-- <input type="text" placeholder="請填入類別" name="category" class="form-control"
-                value="{{transferCN record.category}}"> --}}
             <select name="category">
                 <option value="" {{#ifEquals record.category "" }} selected {{/ifEquals}}>請選擇類別</option>
                 <option value="home" {{#ifEquals record.category "home" }}selected {{/ifEquals}}>家居物業</option>
