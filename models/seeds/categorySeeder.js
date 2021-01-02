@@ -1,7 +1,7 @@
 
 // const categoryCN = ['家居物業', '交通出行', '休閒娛樂', '餐飲食品 ', '其他']
 
-// const categorys = ['home', 'shuttle', 'fun', 'food', 'other']
+// const category = ['home', 'shuttle', 'fun', 'food', 'other']
 
 // const categoryImage = {
 //     home: '<i class= "fas fa-home fa-3x"></i>',
@@ -10,6 +10,7 @@
 //     food: '<i class="fas fa-utensils fa-3x"></i>',
 //     other: '<i class= "fas fa-pen fa-3x"></i> '
 // }
+
 
 const db = require('../../config/mongoose')
 const Category = require('../category')

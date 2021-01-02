@@ -24,14 +24,5 @@ const recordSchema = new Schema({
 })
 
 
-const categoryImage = {
-
-    home: '<i class= "fas fa-home" ></i>',
-    shuttle: '< i class="fas fa-shuttle-van" ></i >',
-    fun: '< i class="fas fa-grin-beam" ></i >',
-    food: '< i class="fas fa-utensils" ></i >',
-    other: ' < i class= "fas fa-pen" ></i > '
-
-}
 
 module.exports = mongoose.model('records', recordSchema)

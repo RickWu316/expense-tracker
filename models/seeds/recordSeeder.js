@@ -1,16 +1,19 @@
 const db = require('../../config/mongoose')
-const records = require('../records') // 載入 todo model
-// const categoryTransfer = require('../../category')
+const records = require('../records')
+const Category = require('../category')
 
-const category = ['home', 'shuttle', 'fun', 'food', 'other']
 
-db.once('open', () => {
+db.once('open', async () => {
     let record = []
+    let category_name = []
+    const category = await Category.find()
+    category.forEach(element => category_name.push(element.category_name))
+
     for (let i = 0; i < 10; i++) {
         record.push(
             {
                 name: 'name-' + i,
-                category: category[Math.floor(Math.random() * 4)],
+                category: category_name[Math.floor(Math.random() * 4)],
                 date: `2020-12-${Math.floor(Math.random() * 30)}`,
                 amount: Math.floor(Math.random() * 1000)
             })

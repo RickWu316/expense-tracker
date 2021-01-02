@@ -3,7 +3,6 @@ const exphbs = require('express-handlebars');
 const bodyParser = require('body-parser') // 引用 body-parser
 const Handlebars = require('handlebars')
 const methodOverride = require('method-override')
-const category = require('./category');
 const app = express()
 const { get } = require('http');
 const PORT = 3000
@@ -17,16 +16,6 @@ app.use(bodyParser.urlencoded({ extended: true }))
 // // 設定每一筆請求都會透過 methodOverride 進行前置處理
 app.use(methodOverride('_method'))
 
-
-//載入轉換icon的helper
-Handlebars.registerHelper('transferIcon', function (aString) {
-    return category.categoryTransIcon(aString)
-})
-
-//載入轉換中文的helper
-Handlebars.registerHelper('transferCN', function (aString) {
-    return category.categoryTransCN(aString)
-})
 
 //載入轉換判斷相等的helper
 Handlebars.registerHelper('ifEquals', function (arg1, arg2, options) {
