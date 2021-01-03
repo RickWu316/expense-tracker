@@ -39,15 +39,6 @@ router.get('/', async (req, res) => {
         .catch(error => console.error(error)) // 錯誤處理
 })
 
-router.delete('/delete/:id', (req, res) => {
-    const body = req.body
-    const id = req.params.id
 
-    return records.findById(id)
-        .then(record => record.remove())
-        .then(() => res.redirect(`/`))
-        .catch(error => console.log(error))
-
-})
 
 module.exports = router

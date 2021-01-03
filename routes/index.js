@@ -3,13 +3,10 @@ const express = require('express')
 const router = express.Router()
 
 const home = require('./modules/home')
-const edit = require('./modules/edit')
-const create = require('./modules/new')
-
+const records = require('./modules/records')
 
 router.use('/', home)
-router.use('/edit', edit)
-router.use('/new', create)
+router.use('/records', records)
 
 
 
