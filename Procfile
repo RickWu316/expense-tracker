@@ -1,1 +1,3 @@
-web: node app.js
+web: npm run start
+web: npm run seed
+
