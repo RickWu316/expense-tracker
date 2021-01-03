@@ -39,7 +39,7 @@ router.get('/', async (req, res) => {
         .catch(error => console.error(error)) // 錯誤處理
 })
 
-router.delete('/records/delete/:id', (req, res) => {
+router.delete('/delete/:id', (req, res) => {
     const body = req.body
     const id = req.params.id
 

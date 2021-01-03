@@ -49,7 +49,7 @@
 
                 <button type="submit" class="btn btn-danger mr-1" data-toggle="modal"
                     data-target="#delete-modal-{{this._id}}">刪除</button>
-                <a class="mr-1 btn btn-secondary" href="./records/edit/{{ this._id }}">修改</a>
+                <a class="mr-1 btn btn-secondary" href="./edit/{{ this._id }}">修改</a>
 
             </div>
         </div>
@@ -63,7 +63,7 @@
                         確定要刪除支出項目 <strong>{{this.name}}</strong> 嗎？
                     </div>
                     <div class="modal-footer">
-                        <form action="./records/delete/{{this._id}}?_method=DELETE" method="POST">
+                        <form action="./delete/{{this._id}}?_method=DELETE" method="POST">
                             <button type="submit" class="btn">確認刪除</button>
                         </form>
                         <button type="button" class="btn" data-dismiss="modal">取消</button>

@@ -8,8 +8,8 @@ const create = require('./modules/new')
 
 
 router.use('/', home)
-router.use('/records/edit', edit)
-router.use('/records/new', create)
+router.use('/edit', edit)
+router.use('/new', create)
 
 
 
