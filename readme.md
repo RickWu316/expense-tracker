@@ -56,9 +56,10 @@ expense-tracker
 npm run seed
 ```
 5. 啟動伺服器，執行專案:
-```
+```shell
 npm run dev
 ```
+
 6. 打開瀏覽器，搜尋:
 ```
 http://localhost/3000
