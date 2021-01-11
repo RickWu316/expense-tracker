@@ -6,12 +6,14 @@ const Category = require('../../models/category')
 
 
 router.get('/', async (req, res) => {
-
     const categorise = await Category.find().lean()
     const filterType = req.query.filter
     const categoryTransIcons = {}
     const categoryTransCN = {}
     let filterRecords = {}
+
+
+    if (!categorise) return res.render("errorPage")
 
     //定義category轉換關係
     for (category of categorise) {
@@ -39,6 +41,7 @@ router.get('/', async (req, res) => {
 
         }) // 將資料傳給 index 樣板
         .catch(error => console.error(error)) // 錯誤處理
+
 })
 
 

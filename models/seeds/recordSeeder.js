@@ -7,6 +7,9 @@ db.once('open', async () => {
     let record = []
     let category_name = []
     const category = await Category.find()
+
+    if (!category) return res.render("errorPage")
+
     category.forEach(element => category_name.push(element.category_name))
 
     for (let i = 0; i < 10; i++) {
