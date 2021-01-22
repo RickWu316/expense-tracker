@@ -1,24 +1,56 @@
 <h1>老爸私房錢</h1>
 
 <div class="dropdown">
-    <button class="btn btn-info dropdown-toggle btn-lg" type=" button" id="dropdownMenuButton" data-toggle="dropdown"
-        aria-expanded="false">
+    {{!-- <button class="btn btn-info dropdown-toggle btn-lg" type=" button" id="dropdownMenuButton"
+        data-toggle="dropdown" aria-expanded="false">
         {{#if filterCN}} {{ filterCN}} {{else}}類別{{/if}}
     </button>
     <form action="./" method="GET">
         <ul class="dropdown-menu " aria-labelledby="dropdownMenuButton">
-            <li><a class="dropdown-item " href="/?filter=home">家居物業</a></li>
-            <li><a class="dropdown-item" href="/?filter=traffic">交通出行</a></li>
-            <li><a class="dropdown-item" href="/?filter=entertainment">休閒娛樂</a></li>
-            <li><a class="dropdown-item" href="/?filter=food">餐飲食品</a></li>
-            <li><a class="dropdown-item" href="/?filter=other">其他</a></li>
+            <li><a class="dropdown-item " href="/records/?filter=home">家居物業</a></li>
+            <li><a class="dropdown-item" href="/records/?filter=traffic">交通出行</a></li>
+            <li><a class="dropdown-item" href="/records/?filter=entertainment">休閒娛樂</a></li>
+            <li><a class="dropdown-item" href="/records/?filter=food">餐飲食品</a></li>
+            <li><a class="dropdown-item" href="/records/?filter=other">其他</a></li>
         </ul>
+    </form> --}}
+    <form class="" action="/records" method="GET" onchange="submit()">
+        <label>類別:
+            <select id="selectCategory" name="category">
+                <option value="" {{#ifEquals categoryFilter "" }}selected{{/ifEquals}}>全選</option>
+                <option value="home" {{#ifEquals categoryFilter "home" }}selected{{/ifEquals}}>家居物業</option>
+                <option value="traffic" {{#ifEquals categoryFilter "traffic" }}selected{{/ifEquals}}>交通出行</option>
+                <option value="entertainment" {{#ifEquals categoryFilter "entertainment" }}selected{{/ifEquals}}>休閒娛樂
+                </option>
+                <option value="food" {{#ifEquals categoryFilter "food" }}selected{{/ifEquals}}>餐飲食品</option>
+                <option value="other" {{#ifEquals categoryFilter "other" }}selected{{/ifEquals}}>其他</option>
+
+            </select>
+        </label>
+
+        <label>月份:
+            <select id="selectMonth" name="month">
+                <option value="" {{#ifEquals monthFilter "" }}selected{{/ifEquals}}>全選</option>
+                {{!-- {{#each months}}
+                <option value="{{this}}" {{#ifEquals monthFilter this }}selected{{/ifEquals}}>
+                    {{this}}月</option>
+                {{/each}} --}}
+                {{#each months}}
+                <option value="{{this}}" {{#ifEquals ../monthFilter this }}selected{{/ifEquals}}>
+                    {{this}}月</option>
+                {{/each}}
+
+                {{!-- <option value="1" {{#ifEquals monthFilter "1" }}selected{{/ifEquals}}>
+                    1月</option>
+                <option value="2" {{#ifEquals monthFilter "2" }}selected{{/ifEquals}}>
+                    2月</option> --}}
+            </select>
+        </label>
     </form>
-    ///要改成表單///
 
 </div>
 
-<div class="row">
+<div class=" row">
     <div class="col-2">
         <h2>總金額</h2>
     </div>

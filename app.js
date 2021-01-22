@@ -8,6 +8,8 @@ const { get } = require('http');
 const PORT = process.env.PORT || 3000
 const routes = require('./routes')// 引用路由器
 
+
+
 app.use(express.static('public'))
 app.engine('handlebars', exphbs({ defaultLayout: 'main' }))
 app.set('view engine', 'handlebars')
