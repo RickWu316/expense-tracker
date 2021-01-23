@@ -11,6 +11,9 @@ const routes = require('./routes')// 引用路由器
 const flash = require('connect-flash')
 const usePassport = require('./config/passport')
 
+if (process.env.NODE_ENV !== 'production') {
+    require('dotenv').config()
+}
 
 
 app.use(express.static('public'))
@@ -21,7 +24,7 @@ app.use(bodyParser.urlencoded({ extended: true }))
 // // 設定每一筆請求都會透過 methodOverride 進行前置處理
 app.use(methodOverride('_method'))
 app.use(session({
-    secret: 'ThisIsMySecret',
+    secret: process.env.SESSION_SECRET,
     resave: false,
     saveUninitialized: true
 }))
@@ -50,7 +53,7 @@ app.use(routes)
 
 
 // 設定應用程式監聽的埠號
-app.listen(PORT, () => {
-    console.log(`App is running on http://localhost:${PORT}`)
+app.listen(process.env.PORT, () => {
+    console.log(`App is running on http://localhost:${process.env.PORT}`)
 })
 
