@@ -7,7 +7,7 @@ const moment = require('moment')
 
 
 router.get('/', async (req, res) => {
-
+    const userId = req.user._id
 
     let months = []
     for (i = 1; i < 13; i++) {
@@ -35,38 +35,7 @@ router.get('/', async (req, res) => {
             filterRecords = records.find().lean()
         }
 
-        // if (monthFilter) {
-        //     filterRecords.find()
-        //         .then((record) => {
-        //             let month = record.filter(element => {
-        //                 if (element.date !== "") {
-        //                     return moment(element.date).format("M") === "12"
-        //                 }
-        //             })
-
-        //             // filterRecords = records.find({ 'category': categoryFilter })
-        //         } else {
-        //             filterRecords = records.find().lean()
-        //         }
-
-
-        // console.log(filterRecords)
-
-        // records.find({})
-        //     .then((record) => {
-        //         let month = record.filter(element => {
-        //             console.log(element.date)
-        //             console.log(moment(element.date).format("M"))
-        //             if (element.date !== "") {
-        //                 return moment(element.date).format("M") === "12"
-        //             }
-        //         })
-        //         console.log(month)
-        //     })
-
-
-
-        filterRecords.find() // 取出 Todo model 裡的所有資料
+        filterRecords.find({ userId }) // 取出 Todo model 裡的所有資料
             .lean() // 把 Mongoose 的 Model 物件轉換成乾淨的 JavaScript 資料陣列
             .then(record => {
                 let filterCN = categoryTransCN[categoryFilter]
@@ -94,17 +63,18 @@ router.get('/', async (req, res) => {
 
 })
 
-router.post('/', (req, res) => {
+// router.post('/', (req, res) => {
 
-    console.log(req.query)
-    console.log(req.body)
+//     console.log(req.query)
+//     console.log(req.body)
 
-})
+// })
 
 
 router.get('/:id/edit', (req, res) => {
-    const id = req.params.id
-    return records.findById(id)
+    const userId = req.user._id
+    const _id = req.params.id
+    return records.findById({ _id, userId })
         .lean()
         .then(record => res.render('edit', { record }))
         .catch(error => console.log(error))
@@ -113,10 +83,11 @@ router.get('/:id/edit', (req, res) => {
 
 
 router.put('/:id/edit', (req, res) => {
+    const userId = req.user._id
     const body = req.body
-    const id = req.params.id
+    const _id = req.params.id
 
-    return records.findById(id)
+    return records.findById({ _id, userId })
         .then(record => {
             for (const element in body) {
                 record[element] = body[element]
@@ -129,10 +100,11 @@ router.put('/:id/edit', (req, res) => {
 })
 
 router.delete('/:id/delete', (req, res) => {
+    const userId = req.user._id
     const body = req.body
-    const id = req.params.id
+    const _id = req.params.id
 
-    return records.findById(id)
+    return records.findById({ _id, userId })
         .then(record => record.remove())
         .then(() => res.redirect(`/`))
         .catch(error => console.log(error))
@@ -145,8 +117,12 @@ router.get('/new', (req, res) => {
 })
 
 router.post('/new', (req, res) => {
+    const userId = req.user._id
     const error = "名稱為必填欄位"
     const body = req.body
+
+    body.userId = userId
+
     if (body.name === "") {
         res.render('new', { error })
     } else {
@@ -156,7 +132,6 @@ router.post('/new', (req, res) => {
     }
 
 })
-
 
 
 

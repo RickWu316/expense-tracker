@@ -3,10 +3,12 @@ const exphbs = require('express-handlebars');
 const bodyParser = require('body-parser') // 引用 body-parser
 const Handlebars = require('handlebars')
 const methodOverride = require('method-override')
+const session = require('express-session')
 const app = express()
 const { get } = require('http');
 const PORT = process.env.PORT || 3000
 const routes = require('./routes')// 引用路由器
+const usePassport = require('./config/passport')
 
 
 
@@ -17,6 +19,11 @@ app.set('view engine', 'handlebars')
 app.use(bodyParser.urlencoded({ extended: true }))
 // // 設定每一筆請求都會透過 methodOverride 進行前置處理
 app.use(methodOverride('_method'))
+app.use(session({
+    secret: 'ThisIsMySecret',
+    resave: false,
+    saveUninitialized: true
+}))
 
 
 //載入轉換判斷相等的helper
@@ -26,6 +33,12 @@ Handlebars.registerHelper('ifEquals', function (arg1, arg2, options) {
 
 require('./config/mongoose')
 
+usePassport(app)
+app.use((req, res, next) => {
+    res.locals.isAuthenticated = req.isAuthenticated()
+    res.locals.user = req.user
+    next()
+})
 // // 將 request 導入路由器
 app.use(routes)
 

@@ -21,6 +21,12 @@ const recordSchema = new Schema({
     amount: {
         type: Number, // 資料型別是字串
         required: false
+    },
+    userId: {  // 加入關聯設定
+        type: Schema.Types.ObjectId,
+        ref: 'User',
+        index: true,
+        required: true
     }
 
 
