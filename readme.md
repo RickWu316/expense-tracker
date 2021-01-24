@@ -2,10 +2,14 @@ expense-tracker
 ===
 expense-tracker 是一個可以協助你紀錄支出項目的網頁<br> 
 
+### 
+
 功能
 ============
+
+1. 登入功能(2020/1/24 新增)
 1. 使用者可瀏覽所有支出
-2. 使用者可瀏覽不同分類的支出
+2. 使用者可瀏覽不同分類/月份的支出 (2021/1/24新增月份篩選)
 3. 使用者可新增支出項目
 4. 使用者可修該支出項目
 5. 使用者可刪除支出項目
@@ -17,8 +21,14 @@ expense-tracker 是一個可以協助你紀錄支出項目的網頁<br>
 * Node.js v10.15.0
 * Express v4.17.1
 * Express-handlebars v5.2.0
-* body-parser: 1.19.0
-* mongoose: 5.11.8
+* body-parser v1.19.0
+* mongoose v5.11.8
+* bcryptjs v2.4.3
+* connect-flash v0.1.1
+* moment v2.29.1
+* dotenv v8.2.0
+
+
  
 ## local packages
 
@@ -64,3 +74,5 @@ npm run dev
 ```
 http://localhost/3000
 ```
+
+7. 輸入帳密登入， 預設帳密: root@example.com /12345678

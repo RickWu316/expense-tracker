@@ -1,19 +1,6 @@
 <h1>老爸私房錢</h1>
 
 <div class="dropdown">
-    {{!-- <button class="btn btn-info dropdown-toggle btn-lg" type=" button" id="dropdownMenuButton"
-        data-toggle="dropdown" aria-expanded="false">
-        {{#if filterCN}} {{ filterCN}} {{else}}類別{{/if}}
-    </button>
-    <form action="./" method="GET">
-        <ul class="dropdown-menu " aria-labelledby="dropdownMenuButton">
-            <li><a class="dropdown-item " href="/records/?filter=home">家居物業</a></li>
-            <li><a class="dropdown-item" href="/records/?filter=traffic">交通出行</a></li>
-            <li><a class="dropdown-item" href="/records/?filter=entertainment">休閒娛樂</a></li>
-            <li><a class="dropdown-item" href="/records/?filter=food">餐飲食品</a></li>
-            <li><a class="dropdown-item" href="/records/?filter=other">其他</a></li>
-        </ul>
-    </form> --}}
     <form class="" action="/records" method="GET" onchange="submit()">
         <label>類別:
             <select id="selectCategory" name="category">
@@ -40,10 +27,6 @@
                     {{this}}月</option>
                 {{/each}}
 
-                {{!-- <option value="1" {{#ifEquals monthFilter "1" }}selected{{/ifEquals}}>
-                    1月</option>
-                <option value="2" {{#ifEquals monthFilter "2" }}selected{{/ifEquals}}>
-                    2月</option> --}}
             </select>
         </label>
     </form>

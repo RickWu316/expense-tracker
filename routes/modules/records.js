@@ -63,13 +63,6 @@ router.get('/', async (req, res) => {
 
 })
 
-// router.post('/', (req, res) => {
-
-//     console.log(req.query)
-//     console.log(req.body)
-
-// })
-
 
 router.get('/:id/edit', (req, res) => {
     const userId = req.user._id
